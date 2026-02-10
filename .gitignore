@@ -5,5 +5,7 @@
 *.user
 *.suo
 .vs/
+.vscode/
 
 *.log
+appsettings.json
