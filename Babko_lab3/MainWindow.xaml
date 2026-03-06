@@ -1,0 +1,100 @@
+﻿<Window x:Class="Babko_lab3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Babko_lab3"
+        mc:Ignorable="d"
+        Title="Shop Orders" Height="450" Width="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Order List" Height="28" 
+                   HorizontalAlignment="Left" Name="LabelOrders" VerticalAlignment="Top"/>
+
+            <DataGrid Grid.Row="1" Name="OrderGrid" AutoGenerateColumns="False" 
+                      IsReadOnly="True" Width="Auto">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightGreen" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                        <EventSetter Event="MouseLeftButtonUp" Handler="OrderGrid_Click"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Нове замовлення" Click="MenuItemAddOrder_Click"/>
+                        <MenuItem Header="Редагувати замовлення" Click="MenuItemEditOrder_Click"/>
+                        <MenuItem Header="Видалити замовлення" Click="MenuItemDeleteOrder_Click"/>
+                        <Separator/>
+                        <MenuItem Header="Довідник товарів" Click="MenuItemGoods_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
+                    <DataGridTextColumn Header="Клієнт" Binding="{Binding CustomerName}" Width="110"/>
+                    <DataGridTextColumn Header="Касир" Binding="{Binding CashierName}" Width="100"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding OrderTime, StringFormat=dd.MM.yyyy HH:mm}" Width="110"/>
+                    <DataGridTextColumn Header="Оплата" Binding="{Binding PaymentMethod}" Width="70"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="80"/>
+                    <DataGridTextColumn Header="Сума" Binding="{Binding TotalPrice, StringFormat=N2}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <GridSplitter Grid.Column="0" Width="3" ShowsPreview="True" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="Gray"/>
+
+        <Grid Grid.Column="1" Margin="3,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Товари в замовленні" Height="28" 
+                   HorizontalAlignment="Left" Name="LabelItems" VerticalAlignment="Top"/>
+
+            <DataGrid Grid.Row="1" Name="OrderItemGrid" AutoGenerateColumns="False" 
+                      IsReadOnly="True" Width="Auto">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightBlue" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Додати товар" Click="MenuItemAddItem_Click"/>
+                        <MenuItem Header="Редагувати позицію" Click="MenuItemEditItem_Click"/>
+                        <MenuItem Header="Видалити позицію" Click="MenuItemDeleteItem_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Товар" Binding="{Binding Goods.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Кількість" Binding="{Binding Quantity}" Width="70"/>
+                    <DataGridTextColumn Header="Ціна" Binding="{Binding Price, StringFormat=N2}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

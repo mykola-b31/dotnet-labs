@@ -1,0 +1,55 @@
+<Window x:Class="Babko_lab3.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Замовлення" Height="520" Width="400">
+    <Grid>
+        <StackPanel Margin="10" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Margin" Value="5,5,5,0"/>
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Margin" Value="5,0,5,5"/>
+                </Style>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="5,0,5,5"/>
+                </Style>
+                <Style TargetType="{x:Type DatePicker}">
+                    <Setter Property="Margin" Value="5,0,5,5"/>
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5,10,10,5"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Label Content="Ім'я клієнта" />
+            <TextBox MinWidth="300" HorizontalAlignment="Left" Name="InputCustomerName"/>
+
+            <Label Content="Ім'я касира" />
+            <TextBox MinWidth="300" HorizontalAlignment="Left" Name="InputCashierName"/>
+
+            <Label Content="Дата замовлення" />
+            <DatePicker MinWidth="300" HorizontalAlignment="Left" Name="InputOrderDate"/>
+
+            <Label Content="Метод оплати" />
+            <ComboBox MinWidth="300" HorizontalAlignment="Left" Name="ComboPaymentMethod">
+                <ComboBoxItem>Cash</ComboBoxItem>
+                <ComboBoxItem>Card</ComboBoxItem>
+                <ComboBoxItem>Online</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Статус замовлення" />
+            <ComboBox MinWidth="300" HorizontalAlignment="Left" Name="ComboStatus">
+                <ComboBoxItem>New</ComboBoxItem>
+                <ComboBoxItem>Completed</ComboBoxItem>
+                <ComboBoxItem>Cancelled</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Загальна сума" />
+            <TextBox MinWidth="300" HorizontalAlignment="Left" Name="InputTotalPrice" IsEnabled="False" Text="0"/>
+
+            <Button Content="Зберегти" Name="SaveButton" Click="ButtonSave_Click" />
+            <Button Content="Скасувати" Name="CancelButton" Click="ButtonCancel_Click" IsEnabled="False"/>
+        </StackPanel>
+    </Grid>
+</Window>

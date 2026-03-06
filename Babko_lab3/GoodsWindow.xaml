@@ -1,0 +1,74 @@
+<Window x:Class="Babko_lab3.GoodsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Довідник товарів" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Margin" Value="0,5,0,0"/>
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Margin" Value="0,0,0,5"/>
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,5,0,5"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Label Content="Назва товару" />
+            <TextBox Name="InputName" />
+            
+            <Label Content="Категорія" />
+            <TextBox Name="InputCategory" />
+
+            <Label Content="Ціна" />
+            <TextBox Name="InputPrice" />
+
+            <Label Content="Одиниця виміру (напр. шт, кг)" />
+            <ComboBox Name="ComboUnit" MinWidth="300" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="0">
+                <ComboBoxItem Content="шт." />
+                <ComboBoxItem Content="кг" />
+                <ComboBoxItem Content="л" />
+                <ComboBoxItem Content="м" />
+                <ComboBoxItem Content="упак." />
+            </ComboBox>
+
+            <Label Content="Кількість на складі" />
+            <TextBox Name="InputQuantity" />
+
+            <Button Content="Зберегти" Name="SaveButton" Click="ButtonSave_Click" />
+            <Button Content="Видалити" Name="DeleteButton" Click="ButtonDelete_Click" IsEnabled="False"/>
+            <Button Content="Скасувати" Name="CancelButton" Click="ButtonCancel_Click" />
+        </StackPanel>
+
+        <GridSplitter Grid.Column="0" Width="2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="LightGray"/>
+
+        <DataGrid Grid.Column="1" Name="GoodsGrid" AutoGenerateColumns="False" 
+                  IsReadOnly="True" Margin="5" MouseLeftButtonUp="GoodsGrid_Click">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="LightCoral" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
+                <DataGridTextColumn Header="Назва" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Категорія" Binding="{Binding Category}" Width="100"/>
+                <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" Width="70"/>
+                <DataGridTextColumn Header="Од. вим." Binding="{Binding Unit}" Width="70"/>
+                <DataGridTextColumn Header="На складі" Binding="{Binding Quantity}" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
