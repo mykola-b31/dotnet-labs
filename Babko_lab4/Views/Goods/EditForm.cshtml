@@ -1,0 +1,53 @@
+@using Babko_lab4.domain
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Goods
+@{
+    Layout = "Layout";
+    ViewData["Title"] = "Edit Goods";
+}
+<h1>Edit Goods</h1>
+<form action="/Goods/Edit" method="post">
+    <input type="hidden" asp-for="Id">
+    <div>
+        <label asp-for="Name"></label>
+    </div>
+    <div>
+        <input type="text" asp-for="Name">
+    </div>
+    <div>
+        <label asp-for="Category"></label>
+    </div>
+    <div>
+        <input type="text" asp-for="Category">
+    </div>
+    <div>
+        <label asp-for="Price"></label>
+    </div>
+    <div>
+        <input type="number" asp-for="Price" step="0.01" asp-format="{0:0.00}">
+    </div>
+    <div>
+        <label asp-for="Unit"></label>
+    </div>
+    <div>
+        <select asp-for="Unit">
+            <option value="шт.">шт</option>
+            <option value="кг">кг</option>
+            <option value="л">л</option>
+            <option value="м">м</option>
+            <option value="упак.">упак.</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Quantity"></label>
+    </div>
+    <div>
+        <input type="number" asp-for="Quantity" min="0" max="5000">
+    </div>
+    <div>
+        <input name="Edit" type="submit" value="Edit Goods" />
+    </div>
+    <div>
+        <a asp-controller="Goods" asp-action="GetAll">Back to goods list</a>
+    </div>
+</form>

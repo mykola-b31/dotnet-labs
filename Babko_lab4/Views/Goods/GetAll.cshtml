@@ -1,0 +1,87 @@
+@using Babko_lab4.domain
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Goods>
+@{
+    Layout = "Layout";
+    ViewData["Title"] = "Goods List";
+}
+<h1>Goods List</h1>
+<table>
+    <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Category)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Price)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Unit)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </td>
+            <td>
+                Actions
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a asp-controller="Goods" asp-action="EditForm" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Goods" asp-action="Delete" asp-route-id="@item.Id"
+                       onclick="return confirm('Ви впевнені, що хочете видалити цей товар? Цю дію неможливо скасувати.');">Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <form action="/Goods/Add" method="post">
+                <td>
+                    <input type="text" name="Name">
+                </td>
+                <td>
+                    <input type="text" name="Category">
+                </td>
+                <td>
+                    <input type="number" name="Price" step="0.01">
+                </td>
+                <td>
+                    <select name="Unit">
+                        <option value="шт.">шт</option>
+                        <option value="кг">кг</option>
+                        <option value="л">л</option>
+                        <option value="м">м</option>
+                        <option value="упак.">упак.</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" name="Quantity">
+                </td>
+                <td>
+                    <input type="submit" name="Add" value="Add Goods">
+                </td>
+            </form>
+        </tr>
+    </tbody>
+</table>
