@@ -1,0 +1,6 @@
+@Babko_lab5_HostAddress = http://localhost:5083
+
+GET {{Babko_lab5_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
