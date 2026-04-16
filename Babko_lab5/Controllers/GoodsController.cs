@@ -52,4 +52,15 @@ public class GoodsContoller : ControllerBase
             return NotFound(new { message = "Nothing was removed. Goods not found." });
         }
     }
+
+    [HttpGet("search/criteria")]
+    [Produces("application/xml")]
+    public IActionResult SearchByCriteria([FromHeader(Name = "search-query")] string? searchQuery)
+    {
+        string query = searchQuery ?? string.Empty;
+
+        IList<Goods> result = NHibernateDAOFactory.getInstance().GetGoodsDAO().SearchByCriteria(query);
+
+        return Ok(result);
+    }
 }

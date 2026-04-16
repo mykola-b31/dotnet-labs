@@ -7,7 +7,7 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddXmlSerializerFormatters();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         var app = builder.Build();

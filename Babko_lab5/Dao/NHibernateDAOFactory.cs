@@ -87,8 +87,8 @@ public class NHibernateDAOFactory : DAOFactory
 
     private static void BuildSchema(Configuration config)
     {
-        //new SchemaUpdate(config).Execute(false, true);
-        new SchemaExport(config).Create(true, true);
+        new SchemaUpdate(config).Execute(false, true);
+        //new SchemaExport(config).Create(true, true);
     }
 
 }
