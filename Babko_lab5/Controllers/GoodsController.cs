@@ -53,8 +53,9 @@ public class GoodsContoller : ControllerBase
         }
     }
 
-    [HttpGet("search/criteria")]
+    [HttpGet]
     [Produces("application/xml")]
+    [Route("search/criteria")]
     public IActionResult SearchByCriteria([FromHeader(Name = "search-query")] string? searchQuery)
     {
         string query = searchQuery ?? string.Empty;
