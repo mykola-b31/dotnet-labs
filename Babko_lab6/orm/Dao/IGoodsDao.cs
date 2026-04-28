@@ -4,5 +4,5 @@ namespace orm.Dao;
 
 public interface IGoodsDAO : IGenericDAO<Goods>
 {
-    IList<Goods> SearchByCriteria(string searchQuery);        
+    IList<Goods> SearchByNativeSql(string searchQuery);        
 }

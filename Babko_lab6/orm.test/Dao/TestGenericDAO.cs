@@ -7,7 +7,7 @@ using orm.Dao;
 namespace orm.test.Dao
 {
     [TestClass]
-    public abstract class TestGenericDaoBase<T> where T : EntityBase
+    public abstract class TestGenericDao<T> where T : EntityBase
     {
         public TestContext TestContext { get; set; }
 

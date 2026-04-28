@@ -8,15 +8,14 @@ public class GoodsDAO : GenericDAO<Goods>, IGoodsDAO
 {
     public GoodsDAO(ISession session) : base(session) { }
 
-    public IList<Goods> SearchByCriteria(string searchQuery)
+    public IList<Goods> SearchByNativeSql(string searchQuery)
     {
-        var criteria = session.CreateCriteria<Goods>();
+        string sql = "SELECT * FROM Goods WHERE Category LIKE :search";
 
-        if (!string.IsNullOrWhiteSpace(searchQuery))
-        {
-            criteria.Add(Restrictions.InsensitiveLike("Category", searchQuery, MatchMode.Anywhere));
-        }
+        var query = session.CreateSQLQuery(sql)
+            .AddEntity(typeof(Goods))
+            .SetParameter("search", "%" + searchQuery + "%");
 
-        return criteria.List<Goods>();
+        return query.List<Goods>();
     }
 }

@@ -6,7 +6,7 @@ using orm.Dao;
 namespace orm.test.Dao;
 
 [TestClass]
-public class TestGoodsDAO : TestGenericDaoBase<Goods>
+public class TestGoodsDAO : TestGenericDao<Goods>
 {
     protected override IGenericDAO<Goods> GetDaoInstance()
     {
@@ -35,6 +35,25 @@ public class TestGoodsDAO : TestGenericDaoBase<Goods>
         Assert.AreEqual(expected.Price, actual.Price, "Ціна товару не співпадає");
         Assert.AreEqual(expected.Unit, actual.Unit, "Одиниця виміру товару не співпадає");
         Assert.AreEqual(expected.Quantity, actual.Quantity, "Кількість товару не співпадає");
+    }
+
+    [TestMethod]
+    public void TestSearchByNativeSql()
+    {
+        var goodsDao = Dao as IGoodsDAO;
+        Assert.IsNotNull(goodsDao, "Dao не реалізує IGoodsDAO");
+
+        string searchTerm = "ruit";
+
+        var results = goodsDao.SearchByNativeSql(searchTerm);
+
+        Assert.IsNotNull(results, "Результат пошуку не повинен бути null");
+        Assert.HasCount(2, results, "Очікується 2 товари у категорії");
+
+        foreach (var item in results)
+        {
+            Assert.IsTrue(item.Category.Contains("ruit"), $"Категорія '{item.Category}' не містить '{searchTerm}'");
+        }
     }
 
 }
